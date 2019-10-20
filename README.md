@@ -1,27 +1,72 @@
-# AngularForms
+Angular Forms
+=====
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.9.
+Angular has two types of Forms 
 
-## Development server
+1) Template Driven Forms
+2) Reactive Forms
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+**Form Control & Form Group**
+Just as a form control instance gives you control over a single input field, a form group instance tracks the form state of a group of form control instances (for example, a form). Each control in a form group instance is tracked by name when creating the form group.
 
-## Code scaffolding
+*Note : 
+we need to import FormsModule for template driver forms
+we need to import ReactiveFroms for Reactive froms*
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+**Data Binding with ngForm**
 
-## Build
+to access the form values, we need to use
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+1) We need to create form refernce using template reference varilable (#userName) assiging to ngForm. 
+Templete reference varialble have "value" property that will have all form control values. 
+Here input tag is a form control that user wants to track. 
 
-## Running unit tests
+2) ngModel directive has to be added to form controls that needs to be tracked and must have name property.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+<form #userForm="ngForm">
+<input type="text" name="username" ngModel>
+{{ userForm.value | json }}
+</form>
+```
 
-## Running end-to-end tests
+**Data Binding with Model**
+```
+<input type="text" name="username" [(ngModel)]="employee.firstname">
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+```
+<form #userForm2="ngForm">
+  <input type="text" name="username" [(ngModel)]="employee.firstName">
+  {{userForm2.value | json }}
+  {{employee | json }}
+</form>
+```
 
-## Further help
+where employee is an instance of Employee class model
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+**Tracking State and Validitiy**
+
+Video : https://www.youtube.com/watch?v=WyWJwR0FJV0&list=PLC3y8-rFHvwhwL-XH04cHOpJnkgRKykFi&index=7
+
+to get the state of DOM, Angular provides few classes along with properties
+
+![Alt text](/ControlState.png?raw=true "Optional Title")
+
+![Alt text](/ngModelStateClassAndProperty.png?raw=true "Optional Title")
+
+to get reference of DOM element, add template reference variable (example  #trvName)
+
+```
+<input type="text" name="username" [(ngModel)]="employee.firstname" #trvName>
+{{  trvName.class }}
+```
+This will show few classes from above list 
+
+In order to get access to the properties, we need to assign ngModel to template refernece variable
+
+```
+<input type="text" name="username" [(ngModel)]="employee.firstname" #trvName="ngModel">
+{{  trvName.untouched }}
+```
+this may return true or false

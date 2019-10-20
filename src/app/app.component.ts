@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'AngularForms';
+
+  employee = new Employee("Mark",100);
+
+}
+
+export class Employee{
+  constructor(
+  firstName:string,
+  salary:Number
+  ){}
 }
