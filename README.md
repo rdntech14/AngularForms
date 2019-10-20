@@ -7,6 +7,7 @@ Angular has two types of Forms
 2) Reactive Forms
 
 **Form Control & Form Group**
+
 Just as a form control instance gives you control over a single input field, a form group instance tracks the form state of a group of form control instances (for example, a form). Each control in a form group instance is tracked by name when creating the form group.
 
 *Note : 
