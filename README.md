@@ -71,3 +71,14 @@ In order to get access to the properties, we need to assign ngModel to template 
 {{  trvName.untouched }}
 ```
 this may return true or false
+
+**Steps for Template Driven Form**
+
+1) Add `#myForm="ngForm"` to form tag 
+2) Element must have ngModel directive
+3) Element must have name properties
+
+```
+<input type="text" name="username" ngModel>
+```
+
