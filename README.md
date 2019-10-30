@@ -81,4 +81,6 @@ this may return true or false
 ```
 <input type="text" name="username" ngModel>
 ```
+We may add submit method as form level `<form (ngSubmit)="addToCartMethod()" #myForm="ngForm">`  or submit button level `    <button type="submit" (click)="addToCartMethod()">Add to Cart</button>`
+
 
