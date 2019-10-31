@@ -6,15 +6,11 @@ Angular has two types of Forms
 1) Template Driven Forms
 2) Reactive Forms
 
-**Form Control & Form Group**
-
-Just as a form control instance gives you control over a single input field, a form group instance tracks the form state of a group of form control instances (for example, a form). Each control in a form group instance is tracked by name when creating the form group.
+## Template Driven Forms
 
 *Note : 
 we need to import FormsModule for template driver forms
 we need to import ReactiveFroms for Reactive froms*
-
-**Data Binding with ngForm**
 
 to access the form values, we need to use
 
@@ -24,27 +20,78 @@ Here input tag is a form control that user wants to track.
 
 2) ngModel directive has to be added to form controls that needs to be tracked and must have name property.
 
+
+ngForm is used.
+ngSubmit is used.
+ngModel will be used to send data from view to .ts.
+
+**Data Binding to variables**
+
+Steps:
+
+1) use ngForm directive at form tag and assign it to reference variable
+2) pass form refernce varilable to click event method
+3) add name properties to input fields ( input, select checkbox, textbox whateven can collect user inputs)
+4) add ngModel to the input tag whose values need to be sent to .ts file.
+
 ```
-<form #userForm="ngForm">
-<input type="text" name="username" ngModel>
-{{ userForm.value | json }}
+<!-- ngModel - DataBinding to variables -->
+
+<form (ngSubmit)="onSubmit(myForm)" #myForm="ngForm">
+  <input type="text" name=username ngModel><br />
+  <input type="text" name=password ngModel><br />
+  <button type="submit" class="btn btn-primary">Submit</button><br />
 </form>
-```
-
-**Data Binding with Model**
-```
-<input type="text" name="username" [(ngModel)]="employee.firstname">
-```
 
 ```
-<form #userForm2="ngForm">
-  <input type="text" name="username" [(ngModel)]="employee.firstName">
-  {{userForm2.value | json }}
-  {{employee | json }}
+.ts file
+```
+
+  onSubmit(myForm) {
+    console.log(myForm);
+    console.log(myForm.value.username);
+  }
+  
+  
+```
+
+**Data Binding to model class object variables**
+
+```
+<!-- ngModel - DataBind to model class object variables -->
+
+<form (ngSubmit)="onSubmit1(myForm1)" #myForm1="ngForm">
+  <input type="text" name="username1" [(ngModel)]="userO.usr"><br />
+  <input type="text" name="password1" [(ngModel)]="userO.pwd"><br />
+  <button type="submit" class="btn btn-primary">Submit</button><br />
 </form>
+
+```
+.ts file
+  
+```
+export class AppComponent {
+
+  userO = new User();
+  userO = new User();
+  
+  onSubmit1(myForm1:NgForm) {
+    console.log(myForm1.value.username1);
+    console.log(this.userO.usr);
+  }
+}
+
+export class User{
+    usr:string;
+    pwd:string;
+}
 ```
 
-where employee is an instance of Employee class model
+**Form Control & Form Group**
+
+Just as a form control instance gives you control over a single input field, a form group instance tracks the form state of a group of form control instances (for example, a form). Each control in a form group instance is tracked by name when creating the form group.
+
+
 
 **Tracking State and Validitiy**
 
